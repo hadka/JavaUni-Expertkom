@@ -6,6 +6,51 @@ import java.util.List;
 public class Runner {
 
 	public static void main(String[] args) {
+		List<String> listString = new ArrayList<String>();
+		listString.add("vicky");
+        listString.add("chirag");
+        listString.add("heer");
+        listString.add("riddhi");
+        listString.add("chirag");
+        
+        DuplicitiesSelector selector = new DuplicitiesSelector();
+        List<String> duplicities = selector.selectDuplicities(listString);
+        selector.printDuplicities(duplicities);
+		
+	   }
+
+
+	public static void runUniqueSelector() {
+		List<String> listString = new ArrayList<String>();
+		listString.add("vicky");
+        listString.add("chirag");
+        listString.add("heer");
+        listString.add("riddhi");
+        listString.add("chirag");
+        UniqueSelector selector = new UniqueSelector();
+        List<String> listOfUniqueWords = selector.selectUniqueFromList(listString);
+        selector.printUniqueStringsFromList(listOfUniqueWords);
+	}
+
+
+	public static void countStringsInList() {
+		StringCounter counter = new StringCounter();
+		List<String> listWithStringsToBeCounted = new ArrayList<>();
+		listWithStringsToBeCounted.add("one");
+		listWithStringsToBeCounted.add("two");
+		listWithStringsToBeCounted.add("andrea");
+		listWithStringsToBeCounted.add("two");
+		counter.countStringsInList(listWithStringsToBeCounted);
+	}
+
+
+	public static void dictionaryCalling() {
+		Dictionary dic = new Dictionary();
+		dic.createDictionary("It’s not a bug – it’s an undocumented feature. (Anonymous)");
+	}
+
+
+	public static void referenceAurguments() {
 		ReferenceArguments ob = new ReferenceArguments(15, 20); 
 		 
 	    System.out.println("ob.a and ob.b before call: " + 
@@ -14,9 +59,8 @@ public class Runner {
 	    ob.change(ob); 
 	 
 	    System.out.println("ob.a and ob.b after call: " + 
-	                       ob.a + " " + ob.b); 	
-		
-	   }
+	                       ob.a + " " + ob.b);
+	}
 
 	
 	public static void demonstrateValueArguments() {
