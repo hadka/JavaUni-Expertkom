@@ -5,7 +5,7 @@ public class Reference {
 	public void demonstrateObjectReference(){
 		
 	    int nums1[] = setValuesForArray(); 
-	    int nums2[] = setValuesForArray();
+	    int nums2[] = setMinusValuesForArray();
 	    
 	    System.out.print("Here is nums1: ");
 		printValuesOfAnArray(nums1);
@@ -29,6 +29,14 @@ public class Reference {
 		int i;
 		for(i=0; i < 10; i++) 
 	      nums[i] = i;
+		return nums;
+	}
+	
+	public int[] setMinusValuesForArray() {
+		int nums[] = new int[10];
+		int i;
+		for(i=0; i < 10; i++) 
+	      nums[i] = -i;
 		return nums;
 	}
 	

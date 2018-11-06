@@ -14,5 +14,8 @@ public class Runner {
 		
 		LengthChecker2 checker2 = new LengthChecker2(array1, array2);
 		checker2.getSumOfLongerArrayItems();
+		
+		int sum = checker2.addAllArrayNumbers(array1);
+		System.out.println("Suma arrayu je "+sum);
 	}
 }
