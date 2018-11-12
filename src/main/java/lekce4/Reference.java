@@ -32,19 +32,19 @@ public class Reference {
 		return nums;
 	}
 	
-	public int[] setMinusValuesForArray() {
-		int nums[] = new int[10];
-		int i;
-		for(i=0; i < 10; i++) 
-	      nums[i] = -i;
-		return nums;
-	}
-	
 	public void printValuesOfAnArray(int[] nums) {
 		int i;
 	    for(i=0; i < 10; i++) {
 	    	System.out.print(nums[i] + " ");   
 	    }
 	    System.out.println();
+	}
+	
+	public int[] setMinusValuesForArray() {
+		int nums[] = new int[10];
+		int i;
+		for(i=0; i < 10; i++) 
+	      nums[i] = -i;
+		return nums;
 	}
 }
