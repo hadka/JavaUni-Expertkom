@@ -6,6 +6,21 @@ import java.util.List;
 public class Runner {
 
 	public static void main(String[] args) {
+		
+		List<String> animals = new ArrayList<>();
+	    animals.add("kocka");
+	    animals.add("had");
+	    animals.add("pes");
+	    animals.add("kralik");
+	    
+	    ZooList zooList = new ZooList(animals);
+	    
+	    List<String> animalsShorterThan5 = zooList.findShorterThan5();
+	    zooList.printRestuls(animalsShorterThan5);		
+}
+	
+
+	public static void duplicitiesSelector() {
 		List<String> listString = new ArrayList<String>();
 		listString.add("vicky");
         listString.add("chirag");
@@ -16,8 +31,7 @@ public class Runner {
         DuplicitiesSelector selector = new DuplicitiesSelector();
         List<String> duplicities = selector.selectDuplicities(listString);
         selector.printDuplicities(duplicities);
-		
-	   }
+	}
 
 
 	public static void runUniqueSelector() {
