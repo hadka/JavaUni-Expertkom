@@ -10,44 +10,53 @@ public class VolumeReader {
 		String volume = "";
 		String volumeUnit = "";
 		
+		String volumeWithX = "";
+		String volumeUnitWithX = "";
+		
 		String[] volumeUnits = {"ks", "g", "kg", "l", "ml", "cl", "dávka", "kapsle", "dkg", "dl"};
 		
 		try {
-			for(int i = 0; i <= productNameArray.length; i++) {
-				if(characterIsDigitFollowedByDigit(productNameArray, i) || characterIsDigitFollowedByComma(productNameArray, i) || characterIsDigitFollowedByDot(productNameArray, i)) {
+			for(int i = 0; i <= productNameArray.length - 1; i++) {
+				if(characterIsDigitFollowedByDigit(productNameArray, i) || characterIsDigitFollowedByComma(productNameArray, i) || characterIsDigitFollowedByDot(productNameArray, i) || characterIsDigitFollowedByX(productNameArray, i)) {
 					volume += productNameArray[i];
 				}else if (characterIsCommaFollowedByDigit(productNameArray, i) || characterIsDotFollowedByDigit(productNameArray, i)) {
 					volume += '.';
 				}else if (characterIsXFollowedByDigit(productNameArray, i)) {
 					volume += 'x';
 				}else if(characterIsDigitFollowedByOneSyllableVolUnit(productNameArray, volumeUnits, i)){
+					volume += productNameArray[i];
+					volumeUnit += productNameArray[i+1];
 					if(volume.contains("x")) {
-						volume = resetVolume(volume);
-						volumeUnit = resetVolumeUnit(volumeUnit);
+						volumeWithX = volume;
+						volumeUnitWithX = volumeUnit;
+						resetVolume(volume);
+						resetVolumeUnit(volumeUnit);
 						continue;
 					}else {
-						volume += productNameArray[i];
-						volumeUnit += productNameArray[i+1];
 						break;
 					}
 				}else if(characterIsDigitFollowedBySpaceAndOneSyllableVolUnit(productNameArray, volumeUnits, i)) {
+					volume += productNameArray[i];
+					volumeUnit += productNameArray[i+2];
 					if(volume.contains("x")) {
-						volume = resetVolume(volume);
-						volumeUnit = resetVolumeUnit(volumeUnit);
+						volumeWithX = volume;
+						volumeUnitWithX = volumeUnit;
+						resetVolume(volume);
+						resetVolumeUnit(volumeUnit);
 						continue;
 					}else {
-						volume += productNameArray[i];
-						volumeUnit += productNameArray[i+2];
 						break;
 					}										
 				}else if(characterIsDigitFollowedByTwoSyllableVolUnit(productNameArray, volumeUnits, i)){
+					volume += productNameArray[i];
+					volumeUnit += Character.toString(productNameArray[i+1]) + Character.toString(productNameArray[i+2]);
 					if(volume.contains("x")) {
-						volume = resetVolume(volume);
-						volumeUnit = resetVolumeUnit(volumeUnit);
+						volumeWithX = volume;
+						volumeUnitWithX = volumeUnit;
+						resetVolume(volume);
+						resetVolumeUnit(volumeUnit);
 						continue;
 					}else {
-						volume += productNameArray[i];
-						volumeUnit += Character.toString(productNameArray[i+1]) + Character.toString(productNameArray[i+2]);
 						break;
 					}
 				}else if(characterIsDigitFollowedByDavka(productNameArray, i)) {
@@ -72,7 +81,19 @@ public class VolumeReader {
 			volumeUnit = "neznama jednotka";
 		}
 		
-		Volume finalVolume = new Volume(Double.parseDouble(volume), volumeUnit);
+		Volume finalVolume = new Volume();
+		if(!volume.equals("")) {
+			finalVolume = new Volume(Double.parseDouble(volume), volumeUnit);
+		}else if(volumeWithX.contains("x")){
+			int i = volumeWithX.indexOf("x");
+			String volumePart1 = volumeWithX.substring(0, i);
+			String volumePart2 = volumeWithX.substring(i+1, volumeWithX.length());
+			finalVolume = new Volume(Double.parseDouble(volumePart1)*Double.parseDouble(volumePart2), volumeUnitWithX);
+		}else {
+			volume = "0.0";
+			volumeUnit = "neznama jednotka";
+			finalVolume = new Volume(Double.parseDouble(volume), volumeUnit);
+		}
 		return finalVolume;
 	}
 	
@@ -94,6 +115,11 @@ public class VolumeReader {
 	
 	public boolean characterIsDigitFollowedByDot(char[] productNameArray, int i) {
 		return Character.isDigit(productNameArray[i]) && productNameArray[i+1] == '.';
+	}
+	
+	public boolean characterIsDigitFollowedByX(char[] productNameArray, int i) {
+		return (Character.isDigit(productNameArray[i]) && productNameArray[i+1] == 'x') ||
+				(Character.isDigit(productNameArray[i]) && productNameArray[i+1] == 'X');
 	}
 	
 	public boolean characterIsCommaFollowedByDigit(char[] productNameArray, int i) {

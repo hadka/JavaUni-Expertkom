@@ -233,10 +233,24 @@ public class VolumeReaderTesting {
 	}
 	
 	@Test
-	public void readVolume20xNoVolume() {
+	public void readVolume20aXoVolume() {
 		Volume finalVolume = reader.readVolumeFromProductName("Nesquik Snack mléčný 4x26g");
-		assertTrue(finalVolume.getVolume().equals(0.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("neznama jednotka"));
+		assertTrue(finalVolume.getVolume().equals(104.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("g"));
+	}
+	
+	@Test
+	public void readVolume20bXNoVolumeMl() {
+		Volume finalVolume = reader.readVolumeFromProductName("Dixi Arvit vlasové tonikum proti vypadávání vlasů 6x10ml");
+		assertTrue(finalVolume.getVolume().equals(60.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ml"));
+	}
+	
+	@Test
+	public void readVolume20cXNoVolumeMl() {
+		Volume finalVolume = reader.readVolumeFromProductName("Lenor tekutá aviváž Summer duopack (2x45 pracích dávek) 2x1360ml");
+		assertTrue(finalVolume.getVolume().equals(2720.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ml"));
 	}
 	
 	@Test
