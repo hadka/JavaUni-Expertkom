@@ -199,7 +199,7 @@ public class VolumeReaderTesting {
 	
 	@Test
 	public void readVolume17bSpace() {
-		Volume finalVolume = reader.readVolumeFromProductName("Edeka frucht joghurt erdbeere 0,1%fett 150 kg");
+		Volume finalVolume = reader.readVolumeFromProductName("Cibule žlutá síť 1 kg-střední");
 		assertTrue(finalVolume.getVolume().equals(0.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("neznama jednotka"));
 	}
