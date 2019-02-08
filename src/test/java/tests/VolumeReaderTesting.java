@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import volumeReader.Volume;
 import volumeReader.VolumeReader;
+import volumeReader.VolumeReaderReg;
 
 public class VolumeReaderTesting {
 	
@@ -17,17 +18,17 @@ public class VolumeReaderTesting {
 		reader = new VolumeReader();
 	}
 	
-	@Test
-	public void checkIfVolumeUnitListContains1() {
-		String[] volumeUnits = {"g", "kg", "l", "ml"};
-		assertTrue(reader.listOfVolumeUnitsContains(volumeUnits, 'g'));
-	}
-	
-	@Test
-	public void checkIfVolumeUnitListContains2() {
-		String[] volumeUnits = {"g", "kg", "l", "ml"};
-		assertTrue(reader.listOfVolumeUnitsContains(volumeUnits, "kg"));
-	}
+//	@Test
+//	public void checkIfVolumeUnitListContains1() {
+//		String[] volumeUnits = {"g", "kg", "l", "ml"};
+//		assertTrue(reader.listOfVolumeUnitsContains(volumeUnits, 'g'));
+//	}
+//	
+//	@Test
+//	public void checkIfVolumeUnitListContains2() {
+//		String[] volumeUnits = {"g", "kg", "l", "ml"};
+//		assertTrue(reader.listOfVolumeUnitsContains(volumeUnits, "kg"));
+//	}
 	
 	@Test
 	public void readVolume1Grams() {
@@ -81,6 +82,8 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume9Brackets() {
 		Volume finalVolume = reader.readVolumeFromProductName("Klokaní steak (cca800g)");
+		System.out.println(finalVolume.getVolume());
+		System.out.println(finalVolume.getVolumeUnit());
 		assertTrue(finalVolume.getVolume().equals(800.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}
@@ -279,5 +282,70 @@ public class VolumeReaderTesting {
 		Volume finalVolume = reader.readVolumeFromProductName("Asan Pet Aloe podestýlka pro hlodavce 45l (9,7kg)");
 		assertTrue(finalVolume.getVolume().equals(45.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("l"));
-	}	
+	}
+	
+	@Test
+	public void generalTest1() {
+		Volume finalVolume = reader.readVolumeFromProductName("Balis Potravinová folie 30m 1ks");
+		assertTrue(finalVolume.getVolume().equals(1.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
+	}
+	
+	@Test
+	public void generalTest2() {
+		Volume finalVolume = reader.readVolumeFromProductName("Bonaqua jemně perlivá sklo 24x250ml");
+		assertTrue(finalVolume.getVolume().equals(6000.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ml"));
+	}
+	
+	@Test
+	public void generalTest3() {
+		Volume finalVolume = reader.readVolumeFromProductName("Funtastic Tortilla 4x25cm");
+		assertTrue(finalVolume.getVolume().equals(0.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("neznama jednotka"));
+	}
+	
+	@Test
+	public void generalTest4() {
+		Volume finalVolume = reader.readVolumeFromProductName("Alete Bio Příkrm Brambory na smetaně s květákem a telecím masem 220g + Při koupi 3ks dáreček");
+		assertTrue(finalVolume.getVolume().equals(220.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("g"));
+	}
+	
+	@Test
+	public void generalTest5() {
+		Volume finalVolume = reader.readVolumeFromProductName("Strep Sugaring voskové depilační pásky na tělo 20ks + 4 ubrousky");
+		assertTrue(finalVolume.getVolume().equals(20.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
+	}
+	
+	@Test
+	public void generalTest6() {
+		Volume finalVolume = reader.readVolumeFromProductName("G&G Filtry na kávu velikost 4 100ks");
+		assertTrue(finalVolume.getVolume().equals(100.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
+	}
+	
+	@Test
+	public void generalTest7() {
+		Volume finalVolume = reader.readVolumeFromProductName("ma Dóza FRESHBOX 3ks (0.2l ,0.5l, 1.0l)");
+		assertTrue(finalVolume.getVolume().equals(3.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
+	}
+	
+	@Test
+	public void generalTest8() {
+		Volume finalVolume = reader.readVolumeFromProductName("Finish Powerball Quantum Max tablety do myčky nádobí 60ks 930g");
+		assertTrue(finalVolume.getVolume().equals(60.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
+	}
+	
+	@Test
+	public void generalTest9() {
+		Volume finalVolume = reader.readVolumeFromProductName("Tyrconnell Port Casks 10y 0,7l 46%");
+		assertTrue(finalVolume.getVolume().equals(0.7));
+		assertTrue(finalVolume.getVolumeUnit().equals("l"));
+	}
+	
+	
 }

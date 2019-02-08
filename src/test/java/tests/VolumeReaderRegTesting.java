@@ -1,8 +1,11 @@
 package tests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import volumeReader.Volume;
 import volumeReader.VolumeReaderReg;
 
 public class VolumeReaderRegTesting {
@@ -16,7 +19,40 @@ public class VolumeReaderRegTesting {
 	
 	@Test
 	public void firstPrint() {
-		reader.readVolumeFromProductName("Brit 400kg");
+		Volume finalVolume = reader.readVolumeFromProductName("Brat 1.400g");
+		assertTrue(finalVolume.getVolume().equals(1.400));
+		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}
-
+	
+	@Test
+	public void firstPrint2() {
+		Volume finalVolume = reader.readVolumeFromProductName("Nesquik Go čokoládová příchuť (4x80g) 320g");
+		System.out.println(finalVolume.getVolume());
+		System.out.println(finalVolume.getVolumeUnit());
+		assertTrue(finalVolume.getVolume().equals(320.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("g"));
+	}
+	
+	@Test
+	public void readVolume1b3ml() {
+		Volume finalVolume = reader.readVolumeFromProductName("Pinot Grigio Garganega 2016, suché bílé 0,75l");
+		assertTrue(finalVolume.getVolume().equals(0.75));
+		assertTrue(finalVolume.getVolumeUnit().equals("l"));
+	}
+	
+	@Test
+	public void readVolume11aDavka() {
+		Volume finalVolume = reader.readVolumeFromProductName("Prasek 80dávek");
+		assertTrue(finalVolume.getVolume().equals(80.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
+	}
+	
+	@Test
+	public void readVolume9Brackets() {
+		Volume finalVolume = reader.readVolumeFromProductName("Klokaní steak (cca800g)");
+		System.out.println(finalVolume.getVolume());
+		System.out.println(finalVolume.getVolumeUnit());
+		assertTrue(finalVolume.getVolume().equals(800.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("g"));
+	}
 }

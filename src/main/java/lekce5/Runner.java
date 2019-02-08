@@ -6,7 +6,19 @@ import java.util.List;
 public class Runner {
 
 	public static void main(String[] args) {
-		
+		ListOrganiser organiser = new ListOrganiser();
+		Integer[] unsortedArray1 = {14, 0, 58, 16, 20};
+		Integer[] unsortedArray2 = {14, 0, 58, 16, 20};
+		Integer[] sortedArrayDescending = organiser.sortArrayDescending(unsortedArray1);
+		Integer[] sortedArrayAscending = organiser.sortArrayAscending(unsortedArray2);
+		System.out.println("Descending: ");
+		organiser.printArray(sortedArrayDescending);
+		System.out.println("Ascending: ");
+		organiser.printArray(sortedArrayAscending);
+	}
+
+
+	public static void findShorterThan5Animals() {
 		List<String> animals = new ArrayList<>();
 	    animals.add("kocka");
 	    animals.add("had");
@@ -16,8 +28,8 @@ public class Runner {
 	    ZooList zooList = new ZooList(animals);
 	    
 	    List<String> animalsShorterThan5 = zooList.findShorterThan5();
-	    zooList.printRestuls(animalsShorterThan5);		
-}
+	    zooList.printRestuls(animalsShorterThan5);
+	}
 	
 
 	public static void duplicitiesSelector() {
@@ -92,16 +104,7 @@ public class Runner {
 	}
 
 	public static void runAminalsDemonstration() {
-		List<String> animals = new ArrayList<>();
-	    animals.add("kocka");
-	    animals.add("had");
-	    animals.add("pes");
-	    animals.add("kralik");
-	    
-	    ZooList zooList = new ZooList(animals);
-	    
-	    List<String> animalsShorterThan5 = zooList.findShorterThan5();
-	    zooList.printRestuls(animalsShorterThan5);
+		findShorterThan5Animals();
 	}
 
 	public static void demoRunner() {
