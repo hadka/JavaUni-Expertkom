@@ -27,8 +27,6 @@ public class VolumeReaderRegTesting {
 	@Test
 	public void firstPrint2() {
 		Volume finalVolume = reader.readVolumeFromProductName("Nesquik Go čokoládová příchuť (4x80g) 320g");
-		System.out.println(finalVolume.getVolume());
-		System.out.println(finalVolume.getVolumeUnit());
 		assertTrue(finalVolume.getVolume().equals(320.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}
@@ -42,7 +40,7 @@ public class VolumeReaderRegTesting {
 	
 	@Test
 	public void readVolume11aDavka() {
-		Volume finalVolume = reader.readVolumeFromProductName("Prasek 80dávek");
+		Volume finalVolume = reader.readVolumeFromProductName("Prasek 80 dávek");
 		assertTrue(finalVolume.getVolume().equals(80.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
 	}
@@ -50,8 +48,6 @@ public class VolumeReaderRegTesting {
 	@Test
 	public void readVolume9Brackets() {
 		Volume finalVolume = reader.readVolumeFromProductName("Klokaní steak (cca800g)");
-		System.out.println(finalVolume.getVolume());
-		System.out.println(finalVolume.getVolumeUnit());
 		assertTrue(finalVolume.getVolume().equals(800.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}

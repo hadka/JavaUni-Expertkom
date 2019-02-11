@@ -6,18 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import volumeReader.Volume;
-import volumeReader.VolumeReader;
 import volumeReader.VolumeReaderReg;
 
 public class VolumeReaderTesting {
 	
-	VolumeReader reader;
+	VolumeReaderReg reader;
 	
 	@Before
 	public void init() {
-		reader = new VolumeReader();
+		reader = new VolumeReaderReg();
 	}
-	
+
 //	@Test
 //	public void checkIfVolumeUnitListContains1() {
 //		String[] volumeUnits = {"g", "kg", "l", "ml"};
@@ -82,8 +81,6 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume9Brackets() {
 		Volume finalVolume = reader.readVolumeFromProductName("Klokaní steak (cca800g)");
-		System.out.println(finalVolume.getVolume());
-		System.out.println(finalVolume.getVolumeUnit());
 		assertTrue(finalVolume.getVolume().equals(800.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}
@@ -147,8 +144,8 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume12cKapsle() {
 		Volume finalVolume = reader.readVolumeFromProductName("Nescafé Dolce Gusto Ristretto Ardenza 112g (16 kapslí)");
-		assertTrue(finalVolume.getVolume().equals(112.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("g"));
+		assertTrue(finalVolume.getVolume().equals(16.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("kapsle"));
 	}
 	
 	@Test
@@ -203,8 +200,8 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume17bSpace() {
 		Volume finalVolume = reader.readVolumeFromProductName("Cibule žlutá síť 1 kg-střední");
-		assertTrue(finalVolume.getVolume().equals(0.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("neznama jednotka"));
+		assertTrue(finalVolume.getVolume().equals(1.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("kg"));
 	}
 	
 	@Test
@@ -231,7 +228,7 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume19bXAndVolume() {
 		Volume finalVolume = reader.readVolumeFromProductName("Tortilla 12 6x110g C&C 450g");
-		assertTrue(finalVolume.getVolume().equals(450.0));
+		assertTrue(finalVolume.getVolume().equals(660.0));
 		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}
 	
@@ -252,8 +249,8 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume20cXNoVolumeMl() {
 		Volume finalVolume = reader.readVolumeFromProductName("Lenor tekutá aviváž Summer duopack (2x45 pracích dávek) 2x1360ml");
-		assertTrue(finalVolume.getVolume().equals(2720.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("ml"));
+		assertTrue(finalVolume.getVolume().equals(90.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
 	}
 	
 	@Test
@@ -266,22 +263,22 @@ public class VolumeReaderTesting {
 	@Test
 	public void readVolume22aDavkaAndVolume() {
 		Volume finalVolume = reader.readVolumeFromProductName("Lovela Prací prášek powder color (40 pracích dávek) 5kg");
-		assertTrue(finalVolume.getVolume().equals(5.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("kg"));
+		assertTrue(finalVolume.getVolume().equals(40.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
 	}	
 	
 	@Test
 	public void readVolume22bDavkaAndVolume() {
 		Volume finalVolume = reader.readVolumeFromProductName("Coccolino Creations Waterlily & Pink Grapefruit aviváž (42 pracích dávek) 1.5l");
-		assertTrue(finalVolume.getVolume().equals(1.5));
-		assertTrue(finalVolume.getVolumeUnit().equals("l"));
+		assertTrue(finalVolume.getVolume().equals(42.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
 	}	
 	
 	@Test
 	public void readVolume23TwoVolumes() {
 		Volume finalVolume = reader.readVolumeFromProductName("Asan Pet Aloe podestýlka pro hlodavce 45l (9,7kg)");
-		assertTrue(finalVolume.getVolume().equals(45.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("l"));
+		assertTrue(finalVolume.getVolume().equals(9.7));
+		assertTrue(finalVolume.getVolumeUnit().equals("kg"));
 	}
 	
 	@Test
@@ -301,8 +298,8 @@ public class VolumeReaderTesting {
 	@Test
 	public void generalTest3() {
 		Volume finalVolume = reader.readVolumeFromProductName("Funtastic Tortilla 4x25cm");
-		assertTrue(finalVolume.getVolume().equals(0.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("neznama jednotka"));
+		assertTrue(finalVolume.getVolume().equals(4.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
 	}
 	
 	@Test
@@ -336,8 +333,8 @@ public class VolumeReaderTesting {
 	@Test
 	public void generalTest8() {
 		Volume finalVolume = reader.readVolumeFromProductName("Finish Powerball Quantum Max tablety do myčky nádobí 60ks 930g");
-		assertTrue(finalVolume.getVolume().equals(60.0));
-		assertTrue(finalVolume.getVolumeUnit().equals("ks"));
+		assertTrue(finalVolume.getVolume().equals(930.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("g"));
 	}
 	
 	@Test
@@ -347,5 +344,24 @@ public class VolumeReaderTesting {
 		assertTrue(finalVolume.getVolumeUnit().equals("l"));
 	}
 	
+	@Test
+	public void testPraciDavka() {
+		Volume finalVolume = reader.readVolumeFromProductName("Lovela Prací prášek powder color (40 pracích dávek) 5kg");
+		assertTrue(finalVolume.getVolume().equals(40.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
+	}
 	
+	@Test
+	public void testPraciDavkaSX() {
+		Volume finalVolume = reader.readVolumeFromProductName("Lenor tekutá aviváž Summer duopack (2x45 pracích dávek) 2x1360ml");
+		assertTrue(finalVolume.getVolume().equals(90.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("dávka"));
+	}	
+	
+	@Test
+	public void testDEN() {
+		Volume finalVolume = reader.readVolumeFromProductName("SCHOLL Light LEGS Kompresní punčochové kalhoty 20 DEN tělové L");
+		assertTrue(finalVolume.getVolume().equals(0.0));
+		assertTrue(finalVolume.getVolumeUnit().equals("neznama jednotka"));
+	}	
 }
