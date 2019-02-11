@@ -1,17 +1,17 @@
 package volumeReader;
 
-public class Volume {
+public class VolumeFromProductName {
 	
 	Double volume;
 	String volumeUnit;
 
-	public Volume(Double volume, String volumeUnit) {
+	public VolumeFromProductName(Double volume, String volumeUnit) {
 		super();
 		this.volume = volume;
 		this.volumeUnit = volumeUnit;
 	}
 
-	public Volume() {
+	public VolumeFromProductName() {
 		super();
 	}
 
@@ -33,6 +33,6 @@ public class Volume {
 
 	@Override
 	public String toString() {
-		return "Volume [volume=" + volume + ", volumeUnit=" + volumeUnit + "]";
+		return "VolumeFromProductName [volume=" + volume + ", volumeUnit=" + volumeUnit + "]";
 	}
 }

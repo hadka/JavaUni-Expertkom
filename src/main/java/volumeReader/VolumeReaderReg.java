@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class VolumeReaderReg {
 	
-	public Volume readVolumeFromProductName(String productName) {
+	public VolumeFromProductName readVolumeFromProductName(String productName) {
 		
 		String[] volumeUnitsArray = {"pracich davek", "davek", "kapsli", "g", "ks", "kg", "l", "ml", "cl", "davka", "kapsle", "praci davka", "dkg", "dl"};
 		List<String> volumeUnitsNoAccents = Arrays.stream(volumeUnitsArray).collect(Collectors.toList());
@@ -18,7 +18,7 @@ public class VolumeReaderReg {
 		String volume = "";
 		String volumeUnit = "";
 		
-		String productNameNoAccents = StringUtils.stripAccents(productName);
+		String productNameNoAccents = StringUtils.stripAccents(productName).replaceAll(" x ", "x").replaceAll(" × ", "x");
 		
 		for(String currentVolUnit : volumeUnitsNoAccents) {
 			String regexCondition1 = returnConditionForAxBPattern();
@@ -61,14 +61,14 @@ public class VolumeReaderReg {
 		return m;
 	}
 	
-	private Volume determineVolumeFromAxBPattern(Matcher m, String currentVolUnit) {
+	private VolumeFromProductName determineVolumeFromAxBPattern(Matcher m, String currentVolUnit) {
 		String theGroup = m.group(0).replaceAll("X", "x");
 		int i = theGroup.indexOf("x");
 		String volumePart1 = theGroup.substring(0, i);
 		String volumePart2 = theGroup.substring(i+1, theGroup.length()).replace(currentVolUnit, "");
 		String volumePartTotal = volumePart1+"x"+volumePart2;
 		currentVolUnit = formatVolume(volumePartTotal, currentVolUnit, theGroup);
-		return new Volume(Double.parseDouble(volumePart1)*Double.parseDouble(volumePart2), currentVolUnit);
+		return new VolumeFromProductName(Double.parseDouble(volumePart1)*Double.parseDouble(volumePart2), currentVolUnit);
 	}
 
 	private String formatVolume(String volume, String volumeUnit, String theGroup2) {
@@ -91,11 +91,11 @@ public class VolumeReaderReg {
 		return volumeRegexCondition2;
 	}
 	
-	private Volume determineVolumeFromStandardVolumePattern(String volume, String volumeUnit, Matcher m, String theGroup) {
+	private VolumeFromProductName determineVolumeFromStandardVolumePattern(String volume, String volumeUnit, Matcher m, String theGroup) {
 			volume = (m.group(0));
 			volumeUnit = formatVolume(volume, volumeUnit, theGroup);
 			volume = volume.replaceAll(",", ".");
-			return new Volume(Double.parseDouble(volume), volumeUnit);
+			return new VolumeFromProductName(Double.parseDouble(volume), volumeUnit);
 	}
 	
 	private boolean volumeAndVolumeUnitIsStillUndetermined(String volume, String volumeUnit) {
@@ -107,17 +107,17 @@ public class VolumeReaderReg {
 		return regexCondition3;
 	}
 	
-	private Volume determineVolumeByPieces(Matcher m, String volume, String volumeUnit) {
+	private VolumeFromProductName determineVolumeByPieces(Matcher m, String volume, String volumeUnit) {
 		String theGroup1 = m.group(0);
 		int i = theGroup1.indexOf("x");
 		volume = theGroup1.substring(0, i);
 		volumeUnit = "ks";
-		return new Volume(Double.parseDouble(volume), volumeUnit);
+		return new VolumeFromProductName(Double.parseDouble(volume), volumeUnit);
 	}
 	
-	private Volume inAnyOtherCaseSetVolumeToUndetermined(String volume, String volumeUnit) {
+	private VolumeFromProductName inAnyOtherCaseSetVolumeToUndetermined(String volume, String volumeUnit) {
 		volume = "0.0";
 		volumeUnit = "neznama jednotka";				
-		return new Volume(Double.parseDouble(volume), volumeUnit);
+		return new VolumeFromProductName(Double.parseDouble(volume), volumeUnit);
 	}
 }

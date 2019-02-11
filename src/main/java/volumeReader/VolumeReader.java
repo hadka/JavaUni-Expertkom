@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class VolumeReader {
 	
-	public Volume readVolumeFromProductName(String productName) {
+	public VolumeFromProductName readVolumeFromProductName(String productName) {
 		char[] productNameArray = convertProductNameToCharArray(productName);
 		
 		String volume = "";
@@ -81,18 +81,18 @@ public class VolumeReader {
 			volumeUnit = "neznama jednotka";
 		}
 		
-		Volume finalVolume = new Volume();
+		VolumeFromProductName finalVolume = new VolumeFromProductName();
 		if(!volume.equals("")) {
-			finalVolume = new Volume(Double.parseDouble(volume), volumeUnit);
+			finalVolume = new VolumeFromProductName(Double.parseDouble(volume), volumeUnit);
 		}else if(volumeWithX.contains("x")){
 			int i = volumeWithX.indexOf("x");
 			String volumePart1 = volumeWithX.substring(0, i);
 			String volumePart2 = volumeWithX.substring(i+1, volumeWithX.length());
-			finalVolume = new Volume(Double.parseDouble(volumePart1)*Double.parseDouble(volumePart2), volumeUnitWithX);
+			finalVolume = new VolumeFromProductName(Double.parseDouble(volumePart1)*Double.parseDouble(volumePart2), volumeUnitWithX);
 		}else {
 			volume = "0.0";
 			volumeUnit = "neznama jednotka";
-			finalVolume = new Volume(Double.parseDouble(volume), volumeUnit);
+			finalVolume = new VolumeFromProductName(Double.parseDouble(volume), volumeUnit);
 		}
 		return finalVolume;
 	}
