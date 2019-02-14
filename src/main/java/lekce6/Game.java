@@ -11,18 +11,22 @@ public class Game {
 	
 	public void playGame() {
 		while (true) {
-			System.out.println("Zadajte \"kamen\", \"nuzky\", \"papir\" alebo \"konec\": ");
+			System.out.println("\nZadajte \"kamen\", \"nuzky\", \"papir\" alebo \"konec\": ");
 			String answer = getAnswerFromThePlayer();
 			String randomElement = getRandomFromComputer();
-			if(answersAreEqual(answer, randomElement)) {
-				System.out.println("Remiza. Pocitac hral " + randomElement + ". Hrac hral "+answer);
-				continue;
-			}else if(computerWon(answer, randomElement)) {
-				System.out.println("Vzhral pocitac. Pocitac hral"+ randomElement + ". Hrac hral "+answer);
-			}else if(playerWishesToEndTheGame(answer)) {
-				System.out.println("Konec.");
+			if(answers.contains(answer)) {
+				if(answersAreEqual(answer, randomElement)) {
+					System.out.println("Remiza. Pocitac hral " + randomElement + ". Hrac hral "+answer);
+				}else if(computerWon(answer, randomElement)) {
+					System.out.println("Vyhral pocitac. Pocitac hral "+ randomElement + ". Hrac hral "+answer);
+				}else if(playerWishesToEndTheGame(answer)) {
+					System.out.println("Konec.");
+					break;
+				}else {
+					System.out.println("Vyhral hrac! Hrac hral "+answer+". Pocitac hral "+randomElement);
+				}
 			}else {
-				System.out.println("Vyhral hrac! Hrac hral "+answer+". Pocitac hral "+randomElement);
+				System.out.println("\nZadejte spravnu odpoved: ");
 			}
 		}
 	}
@@ -40,7 +44,7 @@ public class Game {
 	}
 
 	private boolean playerWishesToEndTheGame(String answer) {
-		return answer == "konec";
+		return answer.equals("konec");
 	}
 
 	private boolean answersAreEqual(String answer, String randomElement) {
@@ -48,6 +52,6 @@ public class Game {
 	}
 
 	private boolean computerWon(String answer, String randomElement) {
-		return (randomElement == "kamen" && answer == "nuzky") || (randomElement == "nuzky" && answer == "papir") || (randomElement == "papir" && answer == "kamen");
+		return (randomElement.equals("kamen") && answer.equals("nuzky")) || (randomElement.equals("nuzky") && answer.equals("papir")) || (randomElement.equals("papir") && answer.equals("kamen"));
 	}
 }
