@@ -1,6 +1,6 @@
 package lekce5;
 
-public class ListOrganiser {
+public class ArrayOrganiser {
 	
 	public Integer[] sortArrayDescending(Integer[] numbers){
 		

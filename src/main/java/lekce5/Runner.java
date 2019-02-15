@@ -20,7 +20,7 @@ public class Runner {
 
 
 	public static void organiseList() {
-		ListOrganiser organiser = new ListOrganiser();
+		ArrayOrganiser organiser = new ArrayOrganiser();
 		Integer[] unsortedArray1 = {14, 0, 58, 16, 20};
 		Integer[] unsortedArray2 = {14, 0, 58, 16, 20};
 		Integer[] sortedArrayDescending = organiser.sortArrayDescending(unsortedArray1);
