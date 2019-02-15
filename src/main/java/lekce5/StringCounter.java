@@ -5,14 +5,7 @@ import java.util.List;
 
 public class StringCounter {
 	
-	public void countStringsInList(List<String> listOfString) {
-		
-		HashMap<String, Integer> stringCountMap = createMapOfWords(listOfString);
-		System.out.println(stringCountMap.toString());
-		
-	}
-
-	public HashMap<String, Integer> createMapOfWords(List<String> listOfString) {
+	public HashMap<String, Integer> countStringsInList(List<String> listOfString) {
 		HashMap<String, Integer> stringCountMap = new HashMap<>();
 		
 		for(String s : listOfString) {

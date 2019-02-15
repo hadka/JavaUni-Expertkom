@@ -1,11 +1,25 @@
 package lekce5;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Runner {
 
 	public static void main(String[] args) {
+		List<String> data = new ArrayList<>();
+		data.add("one");
+		data.add("two");
+		data.add("andrea");
+		data.add("two");		
+		
+		StringCounter counter = new StringCounter();
+		HashMap<String, Integer> results = counter.countStringsInList(data);
+		System.out.println(results);
+	}
+
+
+	public static void organiseList() {
 		ListOrganiser organiser = new ListOrganiser();
 		Integer[] unsortedArray1 = {14, 0, 58, 16, 20};
 		Integer[] unsortedArray2 = {14, 0, 58, 16, 20};
@@ -60,12 +74,14 @@ public class Runner {
 
 
 	public static void countStringsInList() {
-		StringCounter counter = new StringCounter();
 		List<String> listWithStringsToBeCounted = new ArrayList<>();
 		listWithStringsToBeCounted.add("one");
 		listWithStringsToBeCounted.add("two");
 		listWithStringsToBeCounted.add("andrea");
 		listWithStringsToBeCounted.add("two");
+		
+		
+		StringCounter counter = new StringCounter();
 		counter.countStringsInList(listWithStringsToBeCounted);
 	}
 
