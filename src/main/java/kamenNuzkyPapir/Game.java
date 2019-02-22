@@ -1,4 +1,4 @@
-package lekce6;
+package kamenNuzkyPapir;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class Game {
 	
-	List<String> answers = Arrays.asList("kamen", "nuzky", "papir");
+	private final List<String> answers = Arrays.asList("kamen", "nuzky", "papir");
+	private Scanner scan;
 	
 	public void playGame() {
 		while (true) {
@@ -19,12 +20,12 @@ public class Game {
 					System.out.println("Remiza. Pocitac hral " + randomElement + ". Hrac hral "+answer);
 				}else if(computerWon(answer, randomElement)) {
 					System.out.println("Vyhral pocitac. Pocitac hral "+ randomElement + ". Hrac hral "+answer);
-				}else if(playerWishesToEndTheGame(answer)) {
-					System.out.println("Konec.");
-					break;
 				}else {
 					System.out.println("Vyhral hrac! Hrac hral "+answer+". Pocitac hral "+randomElement);
 				}
+			}else if(playerWishesToEndTheGame(answer)) {
+				System.out.println("Hra ukoncena.");
+				break;
 			}else {
 				System.out.println("\nZadejte spravnu odpoved: ");
 			}
@@ -32,7 +33,7 @@ public class Game {
 	}
 
 	private String getAnswerFromThePlayer() {
-		Scanner scan = new Scanner(System.in);
+		scan = new Scanner(System.in);
 		String answer = scan.nextLine();
 		return answer;
 	}
@@ -44,7 +45,7 @@ public class Game {
 	}
 
 	private boolean playerWishesToEndTheGame(String answer) {
-		return answer.equals("konec");
+		return answer=="konec";
 	}
 
 	private boolean answersAreEqual(String answer, String randomElement) {
