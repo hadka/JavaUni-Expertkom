@@ -3,8 +3,6 @@ package lekce6;
 import java.io.File;
 import java.util.List;
 
-import kamenNuzkyPapir.Game;
-
 public class Runner {
 
 	public static void main(String[] args) {

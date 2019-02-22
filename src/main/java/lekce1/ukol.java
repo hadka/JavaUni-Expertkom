@@ -8,5 +8,6 @@ public class ukol {
 		double b = 2.5;
 		
 		int result = (int) a / (int) b;
+		System.out.println(result);
 	}
 }

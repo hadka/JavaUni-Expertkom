@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 
 public class Writer {
 	
+	private BufferedWriter writer;
+
 	public void writeByBufferedReaderToExistingFile(String pathToFile, String contentToWriteToFile) {
 		BufferedWriter bw = null;
 		FileWriter fw = null;		
@@ -30,7 +32,7 @@ public class Writer {
 	}
 	
 	public void writeToNewFile(String newFileName, String somethignToWrite) {
-		BufferedWriter writer = null;
+		writer = null;
 		try {
 		    writer = new BufferedWriter(new OutputStreamWriter(
 		          new FileOutputStream(newFileName), "utf-8"));

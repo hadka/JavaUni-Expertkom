@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class Reader {
 	
+	private BufferedReader br;
+
 	public List<String> readByScanner(String pathToFile) {
 		List<String> text = new ArrayList<>();
 		try { 
@@ -28,7 +30,7 @@ public class Reader {
 	public List<String> readByBufferedReader(File file){
 		List<String> text = new ArrayList<>();
 
-        BufferedReader br = null;
+        br = null;
 
         try {
             FileReader fr = new FileReader(file);
