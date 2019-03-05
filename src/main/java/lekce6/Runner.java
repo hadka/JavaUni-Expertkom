@@ -6,15 +6,16 @@ import java.util.List;
 public class Runner {
 
 	public static void main(String[] args) {
-
+		writerAndReader();
 	}
 
 	public static void writerAndReader() {
 		Writer writer = new Writer();
 		writer.writeToNewFile("andrea.txt", "toto chcem zapisat");
+		writer.writeToExistingFile("C:\\Users\\andre\\Documents\\workspace-sts-3.9.4.RELEASE\\JavaExpertkomUniAndrea\\andrea.txt", "\npridavam text");
 		
 		Reader reader = new Reader();
-		File file = new File("C:\\Users\\andre\\Documents\\workspace-sts-3.9.4.RELEASE\\JavaExpertkomUni\\andrea.txt");
+		File file = new File("C:\\Users\\andre\\Documents\\workspace-sts-3.9.4.RELEASE\\JavaExpertkomUniAndrea\\andrea.txt");
 		List<String> textFromReader = reader.readByBufferedReader(file);
 		for(String s : textFromReader) {
 			System.out.println(s);

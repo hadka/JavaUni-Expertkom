@@ -10,11 +10,11 @@ public class Writer {
 	
 	private BufferedWriter writer;
 
-	public void writeByBufferedReaderToExistingFile(String pathToFile, String contentToWriteToFile) {
+	public void writeToExistingFile(String pathToFile, String contentToWriteToFile) {
 		BufferedWriter bw = null;
 		FileWriter fw = null;		
 		try {
-			fw = new FileWriter(pathToFile);
+			fw = new FileWriter(pathToFile, true);
 			bw = new BufferedWriter(fw);
 			bw.write(contentToWriteToFile);
 		}catch(IOException e) {
