@@ -27,11 +27,11 @@ public class Writer {
 		}
 	}
 	
-	public static void writeToNewFile(String newFileName, String somethignToWrite) {
+	public static void writeToNewFile(String pathToFile, String somethignToWrite) {
 		BufferedWriter writer = null;
 		try {
 		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream(newFileName), "utf-8"));
+		          new FileOutputStream(pathToFile), "utf-8"));
 		    writer.write(somethignToWrite);
 		} catch (IOException ex) {
 		    ex.getLocalizedMessage();

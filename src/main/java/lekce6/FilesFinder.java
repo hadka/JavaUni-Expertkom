@@ -30,8 +30,10 @@ public class FilesFinder {
     }
 	
 	public static void printOutAllTXTFiles(List<String> result) {
+		int i = 1;
 		for (String s : result) {
-            System.out.println(s);
+            System.out.println(i + ". "+s);
+            i ++;
         }
 	}
 }

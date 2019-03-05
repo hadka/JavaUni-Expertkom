@@ -25,6 +25,22 @@ public class Reader {
 		return text;
 	}
 	
+	public static void deleteTextFromFile(List<String> readContent, String textToDelete, String pathToFile) {
+		if(readContent.remove(textToDelete)) {
+			String textToWrite = "";
+			for(String s : readContent) {
+				textToWrite += "\n" + s;
+			}
+			Writer.writeToNewFile(pathToFile, textToWrite);
+		}
+	}
+	
+	public static void printOutputFromReader(List<String> textFromReader) {
+		for(String s : textFromReader) {
+			System.out.println(s);
+		}
+	}
+	
 	public static List<String> readByBufferedReader(String pathToFile){
 		List<String> text = new ArrayList<>();
 		File file = new File(pathToFile);
@@ -55,11 +71,5 @@ public class Reader {
             }
         }
         return text;
-	}
-	
-	public static void printOutputFromReader(List<String> textFromReader) {
-		for(String s : textFromReader) {
-			System.out.println(s);
-		}
 	}
 }

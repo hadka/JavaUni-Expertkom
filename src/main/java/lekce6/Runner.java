@@ -14,6 +14,7 @@ public class Runner {
 		Writer.writeToNewFile(pathToFile, "toto chcem zapisat");
 		Writer.writeToExistingFile(pathToFile, "\npridavam text");
 		Writer.writeToExistingFile(pathToFile, "\npridavam dalsi text");
+		Writer.writeToExistingFile(pathToFile, "\ntext na zmazanie");
 		
 		List<String> textFromReader = Reader.readByScanner(pathToFile);
 		Reader.printOutputFromReader(textFromReader);
@@ -21,6 +22,8 @@ public class Runner {
 		List<String> result = FilesFinder.searchForTXTFilesInFolder(pathToFolder);
 		FilesFinder.printOutAllTXTFiles(result);
 		
+		Reader.deleteTextFromFile(textFromReader, "text na zmazanie", pathToFile);
+		Reader.printOutputFromReader(textFromReader);
 		
 	}
 
