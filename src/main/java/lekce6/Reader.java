@@ -11,9 +11,7 @@ import java.util.Scanner;
 
 public class Reader {
 	
-	private BufferedReader br;
-
-	public List<String> readByScanner(String pathToFile) {
+	public static List<String> readByScanner(String pathToFile) {
 		List<String> text = new ArrayList<>();
 		try { 
 			Scanner scanner = new Scanner(new File(pathToFile));
@@ -27,10 +25,11 @@ public class Reader {
 		return text;
 	}
 	
-	public List<String> readByBufferedReader(File file){
+	public static List<String> readByBufferedReader(String pathToFile){
 		List<String> text = new ArrayList<>();
+		File file = new File(pathToFile);
 
-        br = null;
+		BufferedReader br = null;
 
         try {
             FileReader fr = new FileReader(file);
@@ -56,5 +55,11 @@ public class Reader {
             }
         }
         return text;
-	}	
+	}
+	
+	public static void printOutputFromReader(List<String> textFromReader) {
+		for(String s : textFromReader) {
+			System.out.println(s);
+		}
+	}
 }

@@ -1,6 +1,5 @@
 package lekce6;
 
-import java.io.File;
 import java.util.List;
 
 public class Runner {
@@ -10,16 +9,19 @@ public class Runner {
 	}
 
 	public static void writerAndReader() {
-		Writer writer = new Writer();
-		writer.writeToNewFile("andrea.txt", "toto chcem zapisat");
-		writer.writeToExistingFile("C:\\Users\\andre\\Documents\\workspace-sts-3.9.4.RELEASE\\JavaExpertkomUniAndrea\\andrea.txt", "\npridavam text");
+		String pathToFile = "C:\\Users\\andre\\Desktop\\javaUniTesting\\andrea20.txt";
+		String pathToFolder = "C:\\Users\\andre\\Desktop\\javaUniTesting";
+		Writer.writeToNewFile(pathToFile, "toto chcem zapisat");
+		Writer.writeToExistingFile(pathToFile, "\npridavam text");
+		Writer.writeToExistingFile(pathToFile, "\npridavam dalsi text");
 		
-		Reader reader = new Reader();
-		File file = new File("C:\\Users\\andre\\Documents\\workspace-sts-3.9.4.RELEASE\\JavaExpertkomUniAndrea\\andrea.txt");
-		List<String> textFromReader = reader.readByBufferedReader(file);
-		for(String s : textFromReader) {
-			System.out.println(s);
-		}
+		List<String> textFromReader = Reader.readByScanner(pathToFile);
+		Reader.printOutputFromReader(textFromReader);
+		
+		List<String> result = FilesFinder.searchForTXTFilesInFolder(pathToFolder);
+		FilesFinder.printOutAllTXTFiles(result);
+		
+		
 	}
 
 	public static void devideIntryCatchForLoop() {
