@@ -14,7 +14,7 @@ public class Writer {
 		try {
 			fw = new FileWriter(pathToFile, true);
 			bw = new BufferedWriter(fw);
-			bw.write(contentToWriteToFile);
+			bw.write("\n"+contentToWriteToFile);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}finally {
