@@ -29,7 +29,7 @@ public class Reader {
 		if(readContent.remove(textToDelete)) {
 			String textToWrite = "";
 			for(String s : readContent) {
-				textToWrite += "\n" + s;
+				textToWrite += s+"\n";
 			}
 			Writer.writeToNewFile(pathToFile, textToWrite);
 		}
