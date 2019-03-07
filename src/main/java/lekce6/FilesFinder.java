@@ -11,7 +11,7 @@ public class FilesFinder {
         return search(".*\\.txt", folder);
 	}
 	
-	private static List<String> search(final String pattern, final File folder) {
+	private static List<String> search(String pattern, File folder) {
 		List<String> result = new ArrayList<>();
 		
         for (final File f : folder.listFiles()) {
