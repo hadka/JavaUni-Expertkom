@@ -63,11 +63,10 @@ public class Reader {
         }finally {
             try {
                 br.close();
-            } catch (IOException e) {
+            }catch(IOException e) {
                 System.out.println("Unable to close file: " + file.toString());
-            }
-            catch(NullPointerException ex) {
-            	System.out.println("Buffered reader was never opened. ");
+            }catch(NullPointerException ex) {
+            	System.out.println("File was never opened. ");
             }
         }
         return text;

@@ -30,17 +30,18 @@ public class Writer {
 	public static void writeToNewFile(String pathToFile, String somethignToWrite) {
 		BufferedWriter writer = null;
 		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream(pathToFile), "utf-8"));
+		    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pathToFile), "utf-8"));
 		    writer.write(somethignToWrite);
 		} catch (IOException ex) {
 		    ex.getLocalizedMessage();
 		} finally {
 		   try {
 			   writer.close();
-		   }catch (Exception ex){
-			   ex.getLocalizedMessage();
-		   }
+		   }catch(IOException e) {
+               System.out.println("Unable to close file: " + pathToFile);
+           }catch(NullPointerException ex) {
+        	   System.out.println("File was never opened. ");
+           }
 		}
 	}
 }

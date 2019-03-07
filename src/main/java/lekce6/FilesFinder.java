@@ -16,10 +16,6 @@ public class FilesFinder {
 		
         for (final File f : folder.listFiles()) {
 
-            if (f.isDirectory()) {
-                search(pattern, f);
-            }
-
             if (f.isFile()) {
                 if (f.getName().matches(pattern)) {
                     result.add(f.getAbsolutePath());
