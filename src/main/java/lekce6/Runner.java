@@ -5,7 +5,7 @@ import java.util.List;
 public class Runner {
 
 	public static void main(String[] args) {
-		MovieKeeper keeper = new MovieKeeper("C:\\Users\\andre\\Desktop\\Java Uni\\MovieKeeper");
+		MovieKeeper2 keeper = new MovieKeeper2("C:\\Users\\andre\\Desktop\\Java Uni\\MovieKeeper");
 		keeper.runMovieKeeper();
 		
 	}

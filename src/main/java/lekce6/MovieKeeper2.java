@@ -2,22 +2,29 @@ package lekce6;
 
 import java.util.List;
 
-public class MovieKeeper {
+public class MovieKeeper2 {
+	
 	
 	String pathToFolder;
 
-	public MovieKeeper(String pathToFolder) {
+	public MovieKeeper2(String pathToFolder) {
 		super();
 		this.pathToFolder = pathToFolder;
 	}
 	
 	public void runMovieKeeper() {
 		introduceMovieKeeper();
-		List<String> allTxtFilesList = FilesFinder.searchForTXTFilesInFolder(this.pathToFolder);
-		if(allTxtFilesList.isEmpty()) {
-			administrateEmptyFolder();
-		}else {
-			administrateNONemptyFolder(allTxtFilesList);
+		while(true) {
+			List<String> allTxtFilesList = FilesFinder.searchForTXTFilesInFolder(this.pathToFolder);
+			if(allTxtFilesList.isEmpty()) {
+				if(!administrateEmptyFolder()) {
+					break;
+				}
+			}else {
+				if(!administrateNONemptyFolder(allTxtFilesList)) {
+					break;
+				}
+			}
 		}
 	}
 
@@ -25,30 +32,33 @@ public class MovieKeeper {
 		System.out.println("\nMOVIE KEEPER. Pracujem v adresari "+this.pathToFolder+"\n");
 	}
 
-	private void administrateEmptyFolder() {
+	private boolean administrateEmptyFolder() {
 		informAboutEmptyFolder();
 		String usersChoice = Input.getStringAnswerFromTheUser();
 		if(userWishesNew(usersChoice)) {
 			createNewFile();
-			runMovieKeeper();
+			return true;
 		}else if(userWishesEnd(usersChoice)) {
 			informAboutEnd();
+			return false;
 		}else {
 			requestValidAnswer();
-			runMovieKeeper();
+			return true;
 		}
 	}
 	
-	private void administrateNONemptyFolder(List<String> allTxtFilesList) {
+	private boolean administrateNONemptyFolder(List<String> allTxtFilesList) {
 		informUserAboutFolderContent(allTxtFilesList);
 		String usersChoice = askNextStepsForFolder();
 		if(userWishesNew(usersChoice)) {
 			createNewFile();
-			runMovieKeeper();
+			return true;
 		}else if(userWishesEnd(usersChoice)) {
 			informAboutEnd();
+			return false;
 		}else {
 			administrateOpenFile(allTxtFilesList, usersChoice);
+			return true;
 		}
 	}
 
@@ -63,24 +73,20 @@ public class MovieKeeper {
 			}
 		}catch(NumberFormatException e) {
 			requestValidAnswer();
-			runMovieKeeper();
 		}catch(IndexOutOfBoundsException e) {
 			requestValidAnswer();
-			runMovieKeeper();
 		}
 	}
 
 	private void administrateEmptyFile(String usersChoice, String fileToOpen, List<String> fileContent) {
 		informAboutEmptyFile(usersChoice);
 		displayChoiceForEmptyFile(fileToOpen, fileContent);
-		runMovieKeeper();
 	}
 
 	private void administrateNONemptyFile(String usersChoice, String fileToOpen, List<String> fileContent) {
 		informAboutFileContent(usersChoice);
 		Reader.printOutputFromReader(fileContent);
 		displayChoiceForNONEmptyFile(fileToOpen, fileContent);
-		runMovieKeeper();
 	}
 
 	private void informAboutEmptyFolder() {
